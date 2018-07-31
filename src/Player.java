@@ -1,14 +1,21 @@
+import java.awt.image.BufferedImage;
 
 public class Player {
-	private int x_coord;
-	private int y_coord;
 	
 	enum Direction
 	{
 	    LEFT, RIGHT, UP, DOWN, NONE;
 	}
 	
+	private int x_coord;
+	private int y_coord;
+	
+	private BufferedImage sprite;
 	private Direction facing;
+	
+	public Player() {
+		facing = Direction.NONE;
+	}
 	
 	public int getcoord(boolean left) {
 		if (left)
@@ -33,7 +40,6 @@ public class Player {
 		   case LEFT:
 		      x_coord--;
 		      break;
-		   
 		   case RIGHT :
 		      x_coord++;
 		      break;

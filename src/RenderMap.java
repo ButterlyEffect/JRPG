@@ -3,7 +3,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -14,8 +19,8 @@ public class RenderMap {
 
     BufferStrategy bufferStrategy;
 
-    private int WIDTH = 640;
-    private int HEIGHT = 480;
+    private int WIDTH = 1040;
+    private int HEIGHT = 1040;
 	   
 	public RenderMap() {
 	  frame = new JFrame("Basic Game");
@@ -42,17 +47,18 @@ public class RenderMap {
       // This will add our keyhandler to our program
       canvas.addKeyListener(new KeyHandler());
    }
-   void render() {
+   void render(String filename) throws IOException {
+      File file = new File(filename); 
+      FileInputStream fis = new FileInputStream(file);
+      BufferedImage image = ImageIO.read(fis);
       Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-      g.clearRect(0, 0, WIDTH, HEIGHT);
-      render(g);
+      render(g, image);
       g.dispose();
       bufferStrategy.show();
    }
-   protected void render(Graphics2D g){
+   protected void render(Graphics2D g, BufferedImage img){
       //Here we will render everything
-	   g.setColor(Color.white);
-	   g.fillRect(Instances.player.getcoord(true), Instances.player.getcoord(false), 15, 15);
+	   g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
    }
 
    
