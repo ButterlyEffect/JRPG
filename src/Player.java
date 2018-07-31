@@ -17,18 +17,19 @@ public class Player {
 			return y_coord; 
 	}
 	
-	private void update() {
-		//all the necessary updating and checking of player 
-	}
-	
-	private void setDirection(Direction newDirection) {
+	public void setDirection(Direction newDirection) {
 		//adjust direction
 		facing = newDirection;
 	}
 	
+	public void update(){
+		//all the necessary updating and checking of player 
+		move();
+	}
+	
 	private void move() {
 		//move based on direction
-		switch(facing) {
+		switch(this.facing) {
 		   case LEFT:
 		      x_coord--;
 		      break;
